@@ -214,7 +214,7 @@ class AccountPaymentTerm(models.Model):
     )
     def _compute_example_preview(self):
         """adding depends for new customized fields"""
-        return super(AccountPaymentTerm, self)._compute_example_preview()
+        return super()._compute_example_preview()
 
     def _compute_terms(
         self,
