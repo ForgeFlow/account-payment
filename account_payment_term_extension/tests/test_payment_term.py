@@ -63,8 +63,8 @@ class TestAccountPaymentTerm(TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 0,
+                            "value": "percent",
+                            "nb_days": 0,
                             "weeks": 2,
                         },
                     )
@@ -117,11 +117,9 @@ class TestAccountPaymentTerm(TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 0,
-                            "weeks": 0,
-                            "months": 2,
-                            "end_month": True,
+                            "value": "percent",
+                            "nb_days": 60,
+                            "delay_type": "days_after_end_of_month",
                         },
                     )
                 ],
@@ -156,9 +154,8 @@ class TestAccountPaymentTerm(TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 0,
-                            "weeks": 2,
+                            "value": "percent",
+                            "nb_days": 14,
                         },
                     )
                 ],
@@ -203,9 +200,8 @@ class TestAccountPaymentTerm(TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 0,
-                            "weeks": 2,
+                            "value": "percent",
+                            "nb_days": 14,
                         },
                     )
                 ],

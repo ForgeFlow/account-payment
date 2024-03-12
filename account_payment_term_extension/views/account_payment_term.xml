@@ -32,13 +32,13 @@
                 </field>
             </field>
 
-            <field name="months" position="before">
+            <field name="nb_days" position="before">
                 <field name="amount_round" />
             </field>
-            <field name="months" position="after">
+            <field name="nb_days" position="after">
                 <field name="weeks" />
             </field>
-            <field name="days" position="after">
+            <field name="delay_type" position="after">
                 <field name="payment_days" />
             </field>
         </field>
