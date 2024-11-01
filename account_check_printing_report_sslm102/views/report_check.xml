@@ -64,29 +64,31 @@
                     <span t-esc="fill_stars(o.check_amount_in_words)" />
                 </strong>
             </div>
-            <div name='payment_date' style="position:absolute; right:60mm; top:128mm;">
+            <div name='payment_date' style="position:absolute; right:56mm; top:124mm;">
                 <span t-esc="_format_date_to_partner_lang(o.date, o.partner_id.id)" />
             </div>
-            <div
-                name='payment_amount'
-                style="position:absolute; right:10mm; top:128mm;"
-            >
+            <div name='payment_amount' style="position:absolute; right:8mm; top:124mm;">
                 <span
-                    t-esc="fill_stars_number('%.2f' % o.amount, stars_prefix=5, stars_suffix=1)"
+                    t-esc="fill_stars_number('{:,.2f}'.format(o.amount), stars_prefix=5, stars_suffix=1)"
                 />
             </div>
-            <div name='partner_data' style="position:absolute; top:125mm; left:25mm;">
+            <div name='partner_data' style="position:absolute; top:135mm; left:25mm;">
+                <div t-field="o.partner_id.display_name" />
+                <div t-field="o.partner_id.street" />
+                <div>
+                    <span t-field="o.partner_id.city" />
+                    <span t-esc="' '" />
+                    <span t-field="o.partner_id.state_id.code" />
+                    <span t-esc="' '" />
+                    <span t-field="o.partner_id.zip" />
+                </div>
+            </div>
                 <div
-                    t-field="o.partner_id"
-                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-                />
-            </div>
-            <div
                 name='communication'
-                style="position:absolute; left:20mm; top:150mm;max-width: 100mm;max-height: 10mm;"
+                style="position:absolute; left:20mm; top:154mm;max-width: 100mm;max-height: 10mm;"
             >
-                <span t-field="o.ref" />
-            </div>
+                    <span t-field="o.ref" />
+                </div>
         </div>
     </template>
 
