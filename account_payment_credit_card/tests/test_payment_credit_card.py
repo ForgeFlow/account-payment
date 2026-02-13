@@ -4,41 +4,30 @@
 from datetime import datetime, timedelta
 
 # from odoo import fields
-from odoo.tests import common, tagged
+from odoo.tests import common
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
-@tagged("-at_install", "post_install")
 class TestPaymentCreditCard(common.TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        if not cls.env.company.chart_template_id:
-            # Load a CoA if there's none in current company
-            coa = cls.env.ref("l10n_generic_coa.configurable_chart_template", False)
-            if not coa:
-                # Load the first available CoA
-                coa = cls.env["account.chart.template"].search(
-                    [("visible", "=", True)], limit=1
-                )
-            coa.try_loading(company=cls.env.company, install_demo=False)
-        cls.account_invoice_obj = cls.env["account.move"]
-        cls.account_move_line_obj = cls.env["account.move.line"]
-        cls.account_account_obj = cls.env["account.account"]
-        cls.account_journal_obj = cls.env["account.journal"]
-        cls.partner_12 = cls.env.ref("base.res_partner_12")
+    def setUp(self):
+        super(TestPaymentCreditCard, self).setUp()
+        self.account_invoice_obj = self.env["account.move"]
+        self.account_move_line_obj = self.env["account.move.line"]
+        self.account_account_obj = self.env["account.account"]
+        self.account_journal_obj = self.env["account.journal"]
+        self.partner_12 = self.env.ref("base.res_partner_12")
 
-        cls.journal_sale = cls.account_journal_obj.create(
+        self.journal_sale = self.account_journal_obj.create(
             {"name": "sale_0", "code": "SALE0", "type": "sale", "credit_card": True}
         )
 
-        cls.invoice_data_list = [
+        self.invoice_data_list = [
             # Customer Invoice Data
             [
                 "out_invoice",
-                cls.get_date(set_days=30),
-                cls.partner_12.id,
-                cls.journal_sale.id,
+                self.get_date(set_days=30),
+                self.partner_12.id,
+                self.journal_sale.id,
             ],
         ]
 
@@ -67,8 +56,7 @@ class TestPaymentCreditCard(common.TransactionCase):
             invoice._post(soft=False)
             return invoice
 
-    @classmethod
-    def get_date(cls, set_days):
+    def get_date(self, set_days):
         return (datetime.now() - timedelta(days=-set_days)).strftime(
             DEFAULT_SERVER_DATE_FORMAT
         )
